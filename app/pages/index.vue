@@ -5,6 +5,14 @@
 			Starter Template
 		</h2>
 		<h5>Nuxt 3 / Vuetify / Graphql / Pinia</h5>
+		<h3 class="my-5">Exercise Page</h3>
+		<v-card class="mx-auto my-12" max-width="374">
+			<v-card-title class="text-blue">Display SpaceX Launches</v-card-title>
+			<v-card-actions class="flex justify-center">
+				<NuxtLink to="/SpaceX/launches" class="text-decoration-none text-blue">Open Page</NuxtLink>
+			</v-card-actions>
+		</v-card>
+
 		<h3 class="my-5">
 			Example Pinia
 			<v-chip color="blue">useCounter</v-chip>
