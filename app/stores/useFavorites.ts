@@ -4,6 +4,9 @@ export const useFavorites = defineStore('favorites', {
 	state: () => ({
 		favorites: [] as string[],
 	}),
+	getters: {
+		getFavorites: (state) => state.favorites,
+	},
 	actions: {
 		toggleFavorite(id: string) {
 			const index = this.favorites.indexOf(id)

@@ -31,11 +31,19 @@
 					{{ item.mission_name }}
 				</NuxtLink>
 			</template>
+
+			<template v-slot:item.launch_site="{ item }">
+				<div class="text-truncate" style="max-width: 200px">
+					{{ item.launch_site?.site_name || 'Unknown' }}
+				</div>
+			</template>
+
 			<template v-slot:item.details="{ item }">
 				<div class="text-truncate" style="max-width: 300px">
 					{{ item.details }}
 				</div>
 			</template>
+
 			<template v-slot:item.actions="{ item }">
 				<v-btn icon variant="text" size="small" @click="favorites.toggleFavorite(item.id)">
 					<v-icon :color="favorites.isFavorite(item.id) ? 'red' : 'grey'">
