@@ -6,7 +6,7 @@
 		</div>
 		<v-tooltip text="Favorites">
 			<template v-slot:activator="{ props: favBtn }">
-				<NuxtLink v-bind="favBtn" to="/SpaceX/Favorites" class="text-h6 text-red"><v-icon icon="mdi-heart"></v-icon></NuxtLink>
+				<NuxtLink v-bind="favBtn" to="/Favorites" class="text-h6 text-red"><v-icon icon="mdi-heart"></v-icon></NuxtLink>
 			</template>
 		</v-tooltip>
 	</div>

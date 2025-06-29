@@ -13,7 +13,7 @@
 		<p class="text-body-2">Browse launches and add some to your favorites!</p>
 	</v-container>
 
-	<v-container v-else-if="launches.length > 0">
+	<v-container v-else>
 		<v-row>
 			<v-col cols="4" class="md-4" v-for="launch in launches" :key="launch.id">
 				<v-card class="mb-4 pa-4" elevation="5">
@@ -28,7 +28,7 @@
             </v-col>
 					</v-row>
 
-					<v-card-text>
+					<v-card-text class="d-flex justify-center">
 						<v-chip class="mr-2 mb-2" size="small" color="primary">
 							<v-icon start>mdi-rocket</v-icon>
 							{{ launch.rocket?.rocket_name }}
@@ -49,7 +49,7 @@
 						</v-chip>
 					</v-card-text>
 
-					<v-card-actions>
+					<v-card-actions class="d-flex justify-space-around">
 						<v-btn
 							v-if="launch.links?.article_link"
 							:href="launch.links.article_link"
@@ -61,7 +61,7 @@
 							Read Article
 						</v-btn>
 
-						<v-btn :to="`/SpaceX/Launches/${launch.id}`" color="primary">
+						<v-btn :to="`/Launches/${launch.id}`" color="primary">
 							<v-icon start>mdi-information</v-icon>
 							View Details
 						</v-btn>
@@ -69,11 +69,6 @@
 				</v-card>
 			</v-col>
 		</v-row>
-	</v-container>
-
-	<v-container v-else class="text-center">
-		<v-progress-circular indeterminate color="primary"></v-progress-circular>
-		<p class="mt-4">Loading your favorite launches...</p>
 	</v-container>
 </template>
 
@@ -120,7 +115,6 @@ interface Launch {
 	}
 }
 
-// Create a computed property that fetches data for all favorites
 const launches = computed(() => {
 	return favorites.getFavorites
 		.map((launchId) => {
