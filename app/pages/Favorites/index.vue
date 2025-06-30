@@ -1,5 +1,16 @@
 <template>
 	<v-container class="d-flex align-center justify-space-between">
+		<v-btn
+			color="primary"
+			variant="outlined"
+			prepend-icon="mdi-arrow-left"
+			@click="useRouter().back()"
+			size="large"
+			class="text-none"
+		>
+			<span class="d-none d-sm-inline">Back to Previous Page</span>
+			<span class="d-inline d-sm-none">Back</span>
+		</v-btn>
 		<h1>Favorites</h1>
 		<v-btn @click="favorites.clearFavorites" color="error" variant="outlined">
 			<v-icon start>mdi-heart-remove</v-icon>

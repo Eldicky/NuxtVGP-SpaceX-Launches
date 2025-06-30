@@ -17,7 +17,7 @@
 						variant="outlined"
 						prepend-icon="mdi-arrow-left"
 						@click="useRouter().back()"
-						size="small"
+						size="large"
 						class="text-none"
 					>
 						<span class="d-none d-sm-inline">Back to Previous Page</span>
@@ -78,7 +78,7 @@
 							:hide-delimiters="true"
 							:cycle="true"
 							:interval="5000"
-							:height="$vuetify.display.xs ? 300 : $vuetify.display.sm ? 400 : 550"
+							:height="$vuetify.display.xs ? 400 : $vuetify.display.sm ? 500 : 600"
 						>
 							<v-carousel-item
 								v-for="(image, index) in launch?.links.flickr_images"
