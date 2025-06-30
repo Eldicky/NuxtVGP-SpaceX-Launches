@@ -2,12 +2,12 @@
 	<v-container class="py-8">
 		<v-row class="mb-6">
 			<v-col cols="12">
-				<div class="d-flex align-center justify-space-between">
-					<div>
-						<h1 class="text-h3 font-weight-bold text-primary mb-2">
+				<div class="d-flex flex-column flex-sm-row align-center justify-space-between">
+					<div class="mb-4 mb-sm-0 text-center text-sm-left">
+						<h1 class="text-h4 text-sm-h3 font-weight-bold text-primary mb-2">
 							{{ launch?.mission_name }}
 						</h1>
-						<div class="d-flex align-center">
+						<div class="d-flex align-center justify-center justify-sm-start">
 							<v-icon color="grey-darken-1" class="mr-2">mdi-rocket</v-icon>
 							<span class="text-h6 text-grey-darken-1">{{ launch?.rocket.rocket_name }}</span>
 						</div>
@@ -17,8 +17,11 @@
 						variant="outlined"
 						prepend-icon="mdi-arrow-left"
 						@click="useRouter().back()"
+						size="small"
+						class="text-none"
 					>
-						Back to Previous Page
+						<span class="d-none d-sm-inline">Back to Previous Page</span>
+						<span class="d-inline d-sm-none">Back</span>
 					</v-btn>
 				</div>
 			</v-col>
@@ -26,24 +29,20 @@
 
 		<!-- status cards -->
 		<v-row class="mb-6">
-			<v-col cols="12" md="3">
+			<v-col cols="6" sm="6" md="3">
 				<v-card elevation="2" class="pa-4 text-center">
 					<v-icon size="32" color="indigo" class="mb-2">mdi-calendar</v-icon>
 					<div class="text-subtitle-2 text-grey-darken-1">Launch Year</div>
 					<div class="text-h6 font-weight-bold">{{ launch?.launch_year }}</div>
 				</v-card>
 			</v-col>
-			<v-col cols="12" md="3">
+			<v-col cols="6" sm="6" md="3">
 				<v-card elevation="2" class="pa-4 text-center">
-					<v-icon 
-						size="32" 
-						:color="launch?.launch_success ? 'success' : 'error'" 
-						class="mb-2"
-					>
+					<v-icon size="32" :color="launch?.launch_success ? 'success' : 'error'" class="mb-2">
 						{{ launch?.launch_success ? 'mdi-check-circle' : 'mdi-close-circle' }}
 					</v-icon>
 					<div class="text-subtitle-2 text-grey-darken-1">Status</div>
-					<div 
+					<div
 						class="text-h6 font-weight-bold"
 						:class="launch?.launch_success ? 'text-success' : 'text-error'"
 					>
@@ -51,7 +50,7 @@
 					</div>
 				</v-card>
 			</v-col>
-			<v-col cols="12" md="3">
+			<v-col cols="6" sm="6" md="3">
 				<v-card elevation="2" class="pa-4 text-center">
 					<v-icon size="32" color="secondary" class="mb-2">mdi-map-marker</v-icon>
 					<div class="text-subtitle-2 text-grey-darken-1">Launch Site</div>
@@ -60,7 +59,7 @@
 					</div>
 				</v-card>
 			</v-col>
-			<v-col cols="12" md="3">
+			<v-col cols="6" sm="6" md="3">
 				<v-card elevation="2" class="pa-4 text-center">
 					<v-icon size="32" color="primary" class="mb-2">mdi-information</v-icon>
 					<div class="text-subtitle-2 text-grey-darken-1">Mission</div>
@@ -75,26 +74,39 @@
 				<v-card elevation="4" class="overflow-hidden">
 					<template v-if="launch?.links.flickr_images.length">
 						<v-carousel
-						show-arrows="hover"
-						:hide-delimiters="true"
-						:cycle="true"
-						:interval="5000"
-						:height="550"
-					>
-						<v-carousel-item
-							v-for="(image, index) in launch?.links.flickr_images"
-							:key="index"
-							:src="image"
-							cover
-						></v-carousel-item>
-					</v-carousel>
+							show-arrows="hover"
+							:hide-delimiters="true"
+							:cycle="true"
+							:interval="5000"
+							:height="$vuetify.display.xs ? 300 : $vuetify.display.sm ? 400 : 550"
+						>
+							<v-carousel-item
+								v-for="(image, index) in launch?.links.flickr_images"
+								:key="index"
+								:src="image"
+								cover
+							></v-carousel-item>
+						</v-carousel>
 					</template>
 					<template v-else>
-						<div class="d-flex align-center justify-center" style="height: 400px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
+						<div
+							class="d-flex align-center justify-center"
+							:style="`height: ${$vuetify.display.xs ? '250px' : $vuetify.display.sm ? '350px' : '400px'}; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);`"
+						>
 							<div class="text-center">
-								<v-icon size="120" color="white" class="mb-4 opacity-50">mdi-image-off</v-icon>
-								<h3 class="text-white">No Images Available</h3>
-								<p class="text-white text-body-2">Mission images will appear here when available</p>
+								<v-icon
+									:size="$vuetify.display.xs ? 80 : 120"
+									color="white"
+									class="mb-4 opacity-50"
+								>
+									mdi-image-off
+								</v-icon>
+								<h3 class="text-white" :class="$vuetify.display.xs ? 'text-h6' : 'text-h5'">
+									No Images Available
+								</h3>
+								<p class="text-white text-body-2">
+									Mission images will appear here when available
+								</p>
 							</div>
 						</div>
 					</template>
@@ -104,11 +116,11 @@
 
 		<!-- mission details and resources -->
 		<v-row class="mb-6">
-			<v-col cols="12" md="8">
-				<v-card elevation="2" class="pa-6">
+			<v-col cols="12" lg="8">
+				<v-card elevation="2" class="pa-4 pa-sm-6">
 					<div class="d-flex align-center mb-4">
 						<v-icon color="primary" class="mr-3">mdi-text-box</v-icon>
-						<h2 class="text-h5 font-weight-bold">Mission Details</h2>
+						<h2 class="text-h6 text-sm-h5 font-weight-bold">Mission Details</h2>
 					</div>
 					<div v-if="launch?.details" class="text-body-1 line-height-relaxed">
 						{{ launch.details }}
@@ -119,11 +131,11 @@
 					</div>
 				</v-card>
 			</v-col>
-			<v-col cols="12" md="4">
-				<v-card elevation="2" class="pa-6">
+			<v-col cols="12" lg="4">
+				<v-card elevation="2" class="pa-4 pa-sm-6">
 					<div class="d-flex align-center mb-4">
 						<v-icon color="primary" class="mr-3">mdi-link</v-icon>
-						<h2 class="text-h5 font-weight-bold">Resources</h2>
+						<h2 class="text-h6 text-sm-h5 font-weight-bold">Resources</h2>
 					</div>
 					<div v-if="launch?.links.article_link" class="mb-4">
 						<v-btn
@@ -135,7 +147,8 @@
 							variant="elevated"
 							prepend-icon="mdi-newspaper"
 						>
-							Read Full Article
+							<span class="d-none d-sm-inline">Read Full Article</span>
+							<span class="d-inline d-sm-none">Read Article</span>
 						</v-btn>
 					</div>
 					<div v-else class="text-center py-4">
@@ -147,8 +160,6 @@
 		</v-row>
 	</v-container>
 </template>
-
-
 
 <script setup lang="ts">
 const launchId = useRoute().params.id as string

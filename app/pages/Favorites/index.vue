@@ -15,20 +15,24 @@
 
 	<v-container v-else>
 		<v-row>
-			<v-col cols="4" class="md-4" v-for="launch in launches" :key="launch.id">
+			<v-col cols="12" sm="6" lg="4" v-for="launch in launches" :key="launch.id">
 				<v-card class="mb-4 pa-4" elevation="5">
 					<v-row>
-            <v-col class="d-flex flex-column align-center justify-center" cols="10">
-              <v-card-title class="text-h5">{{ launch.mission_name }}</v-card-title>
-              <v-card-subtitle class="text-body-1">{{ launch.launch_year }}</v-card-subtitle>
-            </v-col>
-            <v-col cols="2">
-              <v-btn icon="mdi-heart-remove" @click="favorites.toggleFavorite(launch.id)" color="error" variant="plain">
-              </v-btn>
-            </v-col>
+						<v-col class="d-flex flex-column align-center justify-center" cols="10">
+							<v-card-title class="text-h5 text-center">{{ launch.mission_name }}</v-card-title>
+							<v-card-subtitle class="text-body-1">{{ launch.launch_year }}</v-card-subtitle>
+						</v-col>
+						<v-col cols="2">
+							<v-btn
+								icon="mdi-heart-remove"
+								@click="favorites.toggleFavorite(launch.id)"
+								color="error"
+								variant="plain"
+							></v-btn>
+						</v-col>
 					</v-row>
 
-					<v-card-text class="d-flex justify-center">
+					<v-card-text class="d-flex flex-wrap justify-center">
 						<v-chip class="mr-2 mb-2" size="small" color="primary">
 							<v-icon start>mdi-rocket</v-icon>
 							{{ launch.rocket?.rocket_name }}
@@ -49,19 +53,21 @@
 						</v-chip>
 					</v-card-text>
 
-					<v-card-actions class="d-flex justify-space-around">
+					<v-card-actions class="d-flex flex-column flex-sm-row justify-space-around">
 						<v-btn
 							v-if="launch.links?.article_link"
 							:href="launch.links.article_link"
 							target="_blank"
 							color="primary"
 							variant="outlined"
+							class="mb-2 mb-sm-0"
+							size="small"
 						>
 							<v-icon start>mdi-newspaper</v-icon>
 							Read Article
 						</v-btn>
 
-						<v-btn :to="`/Launches/${launch.id}`" color="primary">
+						<v-btn :to="`/Launches/${launch.id}`" color="primary" size="small">
 							<v-icon start>mdi-information</v-icon>
 							View Details
 						</v-btn>
