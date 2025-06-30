@@ -207,4 +207,9 @@ const { data } = useAsyncQuery<{
 }>(findQuery, { launchId })
 
 const launch = computed(() => data.value?.launch)
+
+// Set dynamic page title based on mission
+useSeoMeta({
+	title: computed(() => launch.value?.mission_name ? `${launch.value.mission_name} - SpaceX Launch Details` : 'Launch Details - SpaceX')
+})
 </script>

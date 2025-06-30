@@ -79,6 +79,11 @@
 </template>
 
 <script lang="ts" setup>
+// Set page title
+useSeoMeta({
+	title: 'SpaceX Launches - All Missions',
+})
+
 const favorites = useFavorites()
 
 const headers = [

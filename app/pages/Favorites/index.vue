@@ -79,6 +79,11 @@
 </template>
 
 <script setup lang="ts">
+// Set page title
+useSeoMeta({
+	title: 'SpaceX Launches - Favorites',
+})
+
 const favorites = useFavorites()
 
 const findLaunch = gql`
