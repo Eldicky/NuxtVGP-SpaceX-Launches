@@ -7,7 +7,7 @@
 			<v-row>
 				<v-col cols="12" sm="6" md="3">
 					<v-select
-						:model-value="selectedYear"
+						:model-value="selectedYear || null"
 						@update:model-value="setYearFilter"
 						clearable
 						label="Filter by Year"
@@ -45,6 +45,9 @@
 			:headers="headers"
 			:items="sortedLaunches"
 			:header-props="{ style: 'font-weight: bold;' }"
+			:items-per-page="10"
+			:items-per-page-options="[5, 10, 25, 50]"
+			style="max-height: 588px"
 		>
 			<template v-slot:item.mission_name="{ item }">
 				<NuxtLink
@@ -68,11 +71,25 @@
 			</template>
 
 			<template v-slot:item.actions="{ item }">
-				<v-btn icon variant="text" size="small" @click="favorites.toggleFavorite(item.id)">
-					<v-icon :color="favorites.isFavorite(item.id) ? 'red' : 'grey'">
-						{{ favorites.isFavorite(item.id) ? 'mdi-heart' : 'mdi-heart-outline' }}
-					</v-icon>
-				</v-btn>
+				<div class="d-flex justify-center">
+					<v-btn
+						variant="text"
+						size="small"
+						@click="favorites.toggleFavorite(item.id)"
+						class="d-flex align-center"
+						style="max-width: 110px"
+					>
+						<v-icon
+							:color="favorites.isFavorite(item.id) ? 'red' : 'grey'"
+							:class="{ 'mr-1': $vuetify.display.smAndUp }"
+						>
+							{{ favorites.isFavorite(item.id) ? 'mdi-heart' : 'mdi-heart-outline' }}
+						</v-icon>
+						<span class="d-none d-sm-inline">
+							{{ favorites.isFavorite(item.id) ? 'Unfavorite' : 'Favorite' }}
+						</span>
+					</v-btn>
+				</div>
 			</template>
 		</v-data-table>
 	</v-container>
@@ -97,7 +114,7 @@ const headers = [
 	{ key: 'launch_site', title: 'Launch Site', sortable: false },
 	{ key: 'rocket.rocket_name', title: 'Rocket Name', sortable: false },
 	{ key: 'details', title: 'Details', sortable: false },
-	{ key: 'actions', title: 'Actions', sortable: false },
+	{ key: 'actions', title: 'Actions', sortable: false, align: 'center' as const },
 ]
 
 const query = gql`
